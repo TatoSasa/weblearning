@@ -38,7 +38,7 @@ phina.define('MainScene', {
     this.label.fill = 'white'; // 塗りつぶし色
 
     // スプライト画像作成
-    var sprite = Sprite('charset', 48, 80);
+    var sprite = Sprite('charset', 48, 80).addChildTo(this);
     // スプライトにフレームアニメーションをアタッチ
     var anim = FrameAnimateion('animations').attachTo(sprite);
     // アニメーションを指定
