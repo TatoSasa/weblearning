@@ -17,13 +17,21 @@ var ASSETS = {
         'walkR': {
           'frames': [24, 25, 26, 25],
           'next': 'walkR',
-          'frequency': 3,
+          'frequency': 6,
+        },
+        'walkL': {
+          'frames': [12, 13, 14, 13],
+          'next': 'walkL',
+          'frequency': 6,
         }
       }
     }
   }
-}
+};
 
+var cntr = 0;
+var die = 0;
+var anim;
 // MainScene クラスを定義
 phina.define('MainScene', {
   superClass: 'CanvasScene',
@@ -40,16 +48,24 @@ phina.define('MainScene', {
     // スプライト画像作成
     var sprite = Sprite('charset', 48, 80).addChildTo(this);
     // スプライトにフレームアニメーションをアタッチ
-    var anim = FrameAnimateion('animations').attachTo(sprite);
+    anim = FrameAnimation('char01').attachTo(sprite);
     // アニメーションを指定
     anim.gotoAndPlay('walkR');
     sprite.x = this.gridX.center();
     sprite.y = this.gridY.center(2);
   },
-
   // 周期的に実施させる処理
   update: function() {
-    console.log("update !!");
+    console.log("update !! = " + cntr++ );
+    if((cntr % 100) == 0) {
+      if(die == 0) {
+        die = 1;
+        anim.gotoAndPlay('walkL');
+      } else {
+        die = 0;
+        anim.gotoAndPlay('walkR');
+      }
+    }
   }
 });
 
@@ -59,6 +75,8 @@ phina.main(function() {
   var app = GameApp({
     startLabel: 'main', // メインシーンから開始する
     fps:30,
+    // アセット読み込み
+    assets: ASSETS,
   });
   // アプリケーション実行
   app.run();
