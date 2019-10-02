@@ -1,0 +1,20 @@
+{
+    "frame": {
+        "width": 64,
+        "height": 64,
+        "cols": 3,
+        "rows": 2
+    },
+    "animations": {
+        "walkR": {
+        "frames": [0, 1, 2, 1],
+        "next": "walkR",
+        "frequency": 6
+        },
+        "walkL": {
+        "frames": [3, 4, 5, 4],
+        "next": "walkL",
+        "frequency": 6
+        }
+    }
+}
