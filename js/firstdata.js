@@ -24,10 +24,11 @@ var ASSETS = {
 };
 // 定数
 var SCREEN_WIDTH   = 640; // 画面横サイズ
+// var SCREEN_WIDTH   = 1200; // 画面横サイズ
 var SCREEN_HEIGHT  = 960; // 画面縦サイズ
 
 var charX = 64 * 4;
-var charDir = 'R';
+var charDir = 'N';
 /*
  * メインシーン
  */
@@ -171,6 +172,9 @@ phina.define("BtnL", {
     this.onpointstart = function() {
       charDir = 'L';
     };
+    this.onpointend = function() {
+      charDir = 'N';
+    };
   },
 });
 phina.define("BtnR", {
@@ -183,6 +187,9 @@ phina.define("BtnR", {
     this.setInteractive(true);
     this.onpointstart = function() {
       charDir = 'R';
+    };
+    this.onpointend = function() {
+      charDir = 'N';
     };
   },
 });
@@ -234,6 +241,24 @@ phina.define("Charap", {
 });
 
 
+//============================================
+// マネージャーシーン
+//============================================
+phina.define('MyManagerScene' , {
+  superClass: 'ManagerScene' ,
+  init: function() {
+    this.superInit({
+      scenes: [
+        {
+          label: 'main',
+          className: 'MainScene'
+        }
+      ]
+    });
+  }
+});
+
+
 /*
  * メイン処理
  */
@@ -244,10 +269,11 @@ phina.main(function() {
     startLabel: 'main',
     // 画面サイズ指定
     width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT,
+    // height: SCREEN_HEIGHT,
     // アセット読み込み
     assets: ASSETS,
   });
+  // app.replaceScene(MyManagerScene());
   // 実行
   app.run();
 });
